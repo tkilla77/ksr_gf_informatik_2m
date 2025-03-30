@@ -52,7 +52,7 @@ def chain_encrypt(plain_bytes, key_bytes, initialization_vector='12345678'):
 
     for i in range(0, len(plain_bytes), block_size):
         plain_block = plain_bytes[i:i+block_size]
-        key_index = i % len(key_bytes)
+        key_index = (i+block_size) % len(key_bytes)
         key_block = key_bytes[key_index:key_index+block_size]
         cipher_block = block_encrypt(plain_block, key_block, previous_block)
         cipher_bytes += cipher_block
@@ -77,5 +77,5 @@ def chain_decrypt(cipher_bytes, key_bytes, block_size = 8):
         previous_block = cipher_block
     return plain_bytes
 
-key_bytes = text_to_bytes("ROMANSHO")
+key_bytes = text_to_bytes("ROMANSHORN")
 print(bytes_to_text(chain_decrypt(chain_encrypt(text_to_bytes("Eine richtig geheime Botschaft!"), key_bytes), key_bytes)))
