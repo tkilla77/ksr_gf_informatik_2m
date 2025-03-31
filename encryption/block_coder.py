@@ -77,5 +77,23 @@ def chain_decrypt(cipher_bytes, key_bytes, block_size = 8):
         previous_block = cipher_block
     return plain_bytes
 
+
 key_bytes = text_to_bytes("ROMANSHORN")
 print(bytes_to_text(chain_decrypt(chain_encrypt(text_to_bytes("Eine richtig geheime Botschaft!"), key_bytes), key_bytes)))
+
+
+def bytes_to_image(img_bytes, shape):
+    as_np = np.asarray(img_bytes, order='C', dtype="uint8")
+    as_np = as_np.reshape(shape)
+    return as_np
+
+
+img = cv.imread('encryption/penguin.png')
+img_bytes = img.tobytes()
+img_encrypted = chain_encrypt(img_bytes, key_bytes)
+
+cv.imshow("image", bytes_to_image(img_encrypted[8:], (426, 384, 3)))
+img_decrypted = chain_decrypt(img_encrypted, key_bytes)
+cv.waitKey()
+cv.imshow("image", bytes_to_image(img_decrypted, (426, 384, 3)))
+cv.waitKey()
