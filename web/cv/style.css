@@ -65,6 +65,8 @@ section {
   gap: 1em;
   align-items: baseline;
   grid-template-columns: subgrid;
+  transition: background 0.5s;
+  box-shadow: 0 0 1.5em 1em inset #eee;
 }
 
 section-content {
@@ -101,6 +103,10 @@ a {
 
 a:hover {
   text-decoration: underline auto dotted;
+}
+
+section:hover {
+  background-color: #dfdfdf;
 }
 
 @media (max-width: 30em) {
