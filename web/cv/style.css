@@ -53,7 +53,6 @@ img#joke {
 
 h3 {
   grid-column: 1;
-  font-size: 1.5em;
   text-align: end;
   color: #777;
 }
