@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+}
+main {
+    min-height: calc(100vh - 2cm);
+    max-width: 15cm;
+    margin: 1cm auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: 3cm 1fr 3cm;
+    gap: 3mm;
+}
+
+@media screen and (max-width: 12cm) {
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 3cm 1fr 2fr 2fr 3cm;
+    }
+}
+
+header, aside, section, footer {
+    padding: 3mm;
+}
+
+header {
+    grid-column: 1/-1;
+    background-color: antiquewhite;
+}
+
+aside {
+    background-color: lightgreen;
+}
+
+section {
+    background-color: deepskyblue;
+}
+
+footer {
+    grid-column: 1/-1;
+    background-color: lightcyan;
+}
