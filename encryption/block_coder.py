@@ -43,18 +43,17 @@ def block_decrypt(one, two):
 
 def encrypt(plain_bytes, key_bytes, chaining=True, block_size=8):
     # random initialization vector
-    iv = random.randbytes(block_size)
+    iv = list(random.randbytes(block_size))
 
     # ensure our key material is divisible by block_size
     key_bytes = key_bytes * block_size
 
-    first_block = text_to_bytes('a'*block_size)
-    cipher_bytes = block_encrypt(xor(first_block, iv), key_bytes[0:block_size])
-    previous_block = cipher_bytes
+    previous_block = iv
+    cipher_bytes = iv
 
     for i in range(0, len(plain_bytes), block_size):
         plain_block = plain_bytes[i:i+block_size]
-        key_index = (i+block_size) % len(key_bytes)
+        key_index = i % len(key_bytes)
         key_block = key_bytes[key_index:key_index+block_size]
         if chaining:
             plain_block = xor(plain_block, previous_block)
@@ -68,14 +67,14 @@ def decrypt(cipher_bytes, key_bytes, chaining=True, block_size = 8):
     # ensure our key material is divisible by block_size
     key_bytes = key_bytes * block_size
 
-    # the first block is thrown away
+    # recover the IV
     previous_block = cipher_bytes[0:block_size]
     plain_bytes = []
 
     # The decrypted first block is ignored...
     for i in range(block_size, len(cipher_bytes), block_size):
         cipher_block = cipher_bytes[i:i+block_size]
-        key_index = i % len(key_bytes)
+        key_index = (i-block_size) % len(key_bytes)
         key_block = key_bytes[key_index:key_index+block_size]
         plain_block = block_decrypt(cipher_block, key_block)
         if chaining:
