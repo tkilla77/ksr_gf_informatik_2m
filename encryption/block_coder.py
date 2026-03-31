@@ -20,6 +20,7 @@ def bytes_to_text(numbers):
     return text
 
 def binary_to_bytes(binstring):
+    """Returns the list of bytes corresponding to the binary-interpreted sequences of 1s and 0s."""
     binstring *= 8  # ensure we are byte-aligned
     result = []
     for eight in range(0, len(binstring), 8):
@@ -42,6 +43,11 @@ def block_decrypt(one, two):
     return xor(two, one)
 
 def encrypt(plain_bytes, key_bytes, chaining=True, block_size=8):
+    """Block-encrypt a sequence of plaintext bytes with key.
+      * chaining=True: CBC mode
+      * chaining=False: ECB mode
+      The returned ciphertext starts with the IV block.
+    """
     # random initialization vector
     iv = list(random.randbytes(block_size))
 
@@ -64,6 +70,12 @@ def encrypt(plain_bytes, key_bytes, chaining=True, block_size=8):
     return cipher_bytes
 
 def decrypt(cipher_bytes, key_bytes, chaining=True, block_size = 8):
+    """Block-decrypt a sequence of ciphertext bytes with key.
+      * chaining=True: CBC mode
+      * chaining=False: ECB mode
+      The ciphertext is expected to start with the IV block, even in ECB mode.
+    """
+
     # ensure our key material is divisible by block_size
     key_bytes = key_bytes * block_size
 
