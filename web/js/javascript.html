@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dies und das</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Dies und das</h1>
+    <h2>Schnaps-Bier-Sirup</h2>
+    <input type="number" id="inputAge" placeholder="Gib dein Alter ein" onchange="handleKeyPressSBS(event)">
+    <p>Du darst trinken: <span id="spanDrink"></span></p>
+ 
+    <h2>Clicker</h2>
+    <button id="buttonClicker" onclick="handleBtnClicker(event)">Click me!</button>
+    <p>Clicker Count: <span id="spanClicker">0</span></p>
+ 
+    <h2>No Click not Fun!</h2>
+    <p><b>Ziel:</b> Counter so hoch bringen wie möglich. Aber Achtung: bei jedem Klick besteht die (relativ kleine) Wahrscheinlichkeit, dass der Counter zurückgesetzt wird! Mögliches Spiel: Wer erreicht den höchsten Wert in einer Minute?</p>
+    <button id="buttonFunClicker" onclick="handleBtnFunClicker(event)">Click me!</button>
+    <p>Clicker Count: <span id="spanFunClicker">0</span></p>
+ 
+    <h2>Würfel</h2>
+    <button id="buttonDice" onclick="handleBtnDice(event)">Roll the dice!</button>
+    <p>Dice: <span id="spanDice"></span></p>    
+    <canvas id="canvasDice"></canvas>
+ 
+    <h2>Buchstabenzähler</h2>
+    <textarea name="" id="txtArea" cols="30" rows="10" placeholder="Gib einen Text ein" oninput="handleInputTextArea(event)"></textarea>
+    <p>Buchstabenzähler: <span id="spanBuchstabenCounter">0</span></p>
+ 
+    <h2>Vergangene Tage</h2>
+    <input type="date" id="inputDate" placeholder="Wähle ein Datum aus" onchange="handleDateSelected(event)">
+    <p>Anzahl vergangene Tage: <span id="spanPassedDays">0</span></p>
+ 
+</body>
+</html>
